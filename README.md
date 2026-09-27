@@ -13,6 +13,9 @@
 
 iOpenPod is a free, cross-platform iPod manager and iTunes alternative for Linux, macOS, and Windows enabling FLAC to ALAC auto-conversion, iTunesDB metadata editing, and native podcast syncing. Built on Python and PyQt6, it allows you to browse and edit your iPod library, sync media from your PC, and seamlessly preserve iPod-specific database behaviors.
 
+> [!NOTE]
+> **This is an enhanced fork** of [TheRealSavi/iOpenPod](https://github.com/TheRealSavi/iOpenPod) with one major addition: **Subsonic playlist sync**. Connect any Subsonic-compatible server — Navidrome, Airsonic, Gonic, or original Subsonic — from *Settings → Subsonic*, then sync its playlists onto your iPod via *Sidebar → Sync Subsonic*. Playlists are matched to tracks already in your iPod library by fuzzy title/artist matching, so nothing is downloaded. All upstream features work exactly as documented below.
+
 ![Album Browser](docs/screenshots/hero.webp)
 
 ## Screenshots
