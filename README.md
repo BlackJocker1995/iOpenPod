@@ -1,20 +1,23 @@
-# iOpenPod: The Open-Source iPod Manager & iTunes Alternative for Windows, macOS, and Linux
+# iOpenPod-Subsonic: Open-Source iPod Manager with Subsonic Sync (Windows, macOS, Linux)
 
-**Sync, manage, and listen to your iPod**
+**Sync, manage, and listen to your iPod — now with Subsonic/Navidrome playlist sync**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=plastic)](LICENSE)
 [![Platform: Win | Mac | Linux](https://img.shields.io/badge/Platform-Win%20%7C%20Mac%20%7C%20Linux-2ea44f.svg?style=plastic)](#download-and-install)
-[![GitHub Release](https://img.shields.io/github/v/release/TheRealSavi/iOpenPod?style=plastic&color=0a6fdb)](https://github.com/TheRealSavi/iOpenPod/releases/latest)
-[![GitHub Stars](https://img.shields.io/github/stars/TheRealSavi/iOpenPod?style=plastic&color=6e5494)](https://github.com/TheRealSavi/iOpenPod/stargazers)
-[![PyPI Downloads](https://img.shields.io/pypi/dm/iopenpod?style=plastic&color=0a6fdb&cacheSeconds=86400)](https://pypi.org/project/iopenpod/)
+[![GitHub Release](https://img.shields.io/github/v/release/BlackJocker1995/iOpenPod-Subsonic?style=plastic&color=0a6fdb)](https://github.com/BlackJocker1995/iOpenPod-Subsonic/releases/latest)
+[![Upstream](https://img.shields.io/badge/upstream-TheRealSavi%2FiOpenPod-6e5494?style=plastic)](https://github.com/TheRealSavi/iOpenPod)
 [![Discord](https://img.shields.io/badge/Discord-Join-5865F2?style=plastic)](https://discord.gg/9Yy499Tf5d)
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/johngibbons)
+iOpenPod-Subsonic is an enhanced fork of [TheRealSavi/iOpenPod](https://github.com/TheRealSavi/iOpenPod) — a free, cross-platform iPod manager and iTunes alternative — that adds **Subsonic playlist sync** for Subsonic-compatible servers (**Navidrome**, Airsonic, Gonic, original Subsonic). Everything from upstream works as before: FLAC to ALAC auto-conversion, iTunesDB metadata editing, podcast syncing, and more, built on Python and PyQt6.
 
-iOpenPod is a free, cross-platform iPod manager and iTunes alternative for Linux, macOS, and Windows enabling FLAC to ALAC auto-conversion, iTunesDB metadata editing, and native podcast syncing. Built on Python and PyQt6, it allows you to browse and edit your iPod library, sync media from your PC, and seamlessly preserve iPod-specific database behaviors.
+### What this fork adds
 
-> [!NOTE]
-> **This is an enhanced fork** of [TheRealSavi/iOpenPod](https://github.com/TheRealSavi/iOpenPod) with one major addition: **Subsonic playlist sync**. Connect any Subsonic-compatible server — Navidrome, Airsonic, Gonic, or original Subsonic — from *Settings → Subsonic*, then sync its playlists onto your iPod via *Sidebar → Sync Subsonic*. Playlists are matched to tracks already in your iPod library by fuzzy title/artist matching, so nothing is downloaded. All upstream features work exactly as documented below.
+- **Settings → Subsonic**: connect your Subsonic server (URL, username, password) and test the connection.
+- **Sidebar → Sync Subsonic**: pick which server playlists to sync, map each one to a new or existing iPod playlist, and choose merge or overwrite per playlist.
+- **Nothing is downloaded**: playlists reference songs already in your iPod library, matched by fuzzy title/artist matching — ideal when your Navidrome library mirrors what's on the iPod.
+
+> [!TIP]
+> Upstream's PyPI package and releases do **not** include the Subsonic features. For Subsonic sync, install from **this fork** (see below).
 
 ![Album Browser](docs/screenshots/hero.webp)
 
@@ -30,35 +33,28 @@ iOpenPod is a free, cross-platform iPod manager and iTunes alternative for Linux
 
 ## Download and Install
 
-Download the latest release for your platform. Native builds do not require any separate Python installation.
+### This fork (with Subsonic sync)
 
-PyPI installs are recommended over native builds, but they all work the same.
-
-### [Latest Native Release Builds](https://github.com/TheRealSavi/iOpenPod/releases/latest)
-
-Need setup help? Use the [Install Help and Troubleshooting page](https://therealsavi.github.io/iOpenPod/install-help.html).
-
-### Install from PyPI (Recommended)
-
-iOpenPod is available through `pip`, `pipx`, and `uv tool`.
-
-| Method | Install | Run | Upgrade |
-| --- | --- | --- | --- |
-| `pip` | `python -m pip install iopenpod` | `iopenpod` | `python -m pip install --upgrade iopenpod` |
-| `pipx` | `pipx install iopenpod` | `iopenpod` | `pipx upgrade iopenpod` |
-| `uv tool` | `uv tool install iopenpod` | `iopenpod` | `uv tool upgrade iopenpod` |
-
-Requires **Python 3.11+**.
-
-After installing, run:
+Native builds are attached to this fork's [Releases](https://github.com/BlackJocker1995/iOpenPod-Subsonic/releases) — download the archive for your platform, no Python needed. If no release is published yet, run from source:
 
 ```bash
-iopenpod
+git clone https://github.com/BlackJocker1995/iOpenPod-Subsonic.git
+cd iOpenPod-Subsonic
+uv sync
+uv run iopenpod
 ```
 
-If `iopenpod` is not on your PATH yet, run `pipx ensurepath` for `pipx` or `uv tool update-shell` for `uv tool`.
+Requires **Python 3.11+**. Prerequisites: [uv](https://docs.astral.sh/uv/), [FFmpeg](https://ffmpeg.org/) with `ffprobe`, and [Chromaprint](https://acoustid.org/chromaprint).
 
-Update installs with the same tool you used to install them.
+### Upstream (without Subsonic sync)
+
+The original iOpenPod is available from [upstream releases](https://github.com/TheRealSavi/iOpenPod/releases/latest) and [PyPI](https://pypi.org/project/iopenpod/):
+
+| Method | Install | Run |
+| --- | --- | --- |
+| `pip` | `python -m pip install iopenpod` | `iopenpod` |
+| `pipx` | `pipx install iopenpod` | `iopenpod` |
+| `uv tool` | `uv tool install iopenpod` | `iopenpod` |
 
 > **Required tools:** Install [FFmpeg](https://ffmpeg.org/) with `ffprobe` for transcoding and media probing, and [Chromaprint](https://acoustid.org/chromaprint) for acoustic fingerprinting during sync.
 > **Linux desktop dependencies:** If iOpenPod throws a Qt `xcb` error or crashes when you press Ctrl, Alt, or Shift, install the XCB and XKeyboard packages listed on the [Install Help and Troubleshooting page](https://therealsavi.github.io/iOpenPod/install-help.html#helper-tools).
@@ -78,6 +74,10 @@ Update installs with the same tool you used to install them.
 ## Core Features and Hardware Compatibility
 
 iOpenPod supports the iPod Classic, iPod Mini, and iPod Nano from the 1st through 7th generations. Rockbox works when you enable the Rockbox compatibility settings.
+
+### Subsonic Playlist Sync
+
+This fork's headline feature. Configure a Subsonic-compatible server in **Settings → Subsonic**, then use **Sidebar → Sync Subsonic** to pull server playlists onto your iPod. Each playlist can map to a new or existing iPod playlist, with per-playlist merge or overwrite semantics. Songs are matched, not downloaded, so your storage usage never grows.
 
 ### Automated FLAC Format Conversion and Transcoding
 
@@ -140,8 +140,8 @@ To run iOpenPod from source, clone the repository and use `uv sync`.
 ### Setup
 
 ```bash
-git clone https://github.com/TheRealSavi/iOpenPod.git
-cd iOpenPod
+git clone https://github.com/BlackJocker1995/iOpenPod-Subsonic.git
+cd iOpenPod-Subsonic
 uv sync
 uv run iopenpod
 ```
